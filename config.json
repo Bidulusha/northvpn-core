@@ -1,0 +1,120 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "protocol": "tun",
+      "settings": {
+        "name": "utun10",
+        "desc": "Wintun",
+        "mtu": 1500,
+        "gateway": [
+          "10.0.0.1/16",
+          "fc00::1/64"
+        ],
+        "dns": [
+          "1.1.1.1",
+          "8.8.8.8"
+        ],
+        "userLevel": 0,
+        "autoSystemRoutingTable": [
+          "0.0.0.0/0",
+          "::/0"
+        ],
+        "autoOutboundsInterface": "auto"
+      },
+      "tag": "tun-in"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "cdn-yc.northvpnfirst.ru",
+            "port": 443,
+            "users": [
+              {
+                "encryption": "none",
+                "id": "2e1c6dad-6e2a-42a1-a7d0-2c36646697fa",
+                "security": "auto"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "alpn": [
+            "h2"
+          ],
+          "fingerprint": "chrome",
+          "serverName": "cdn-yc.northvpnfirst.ru"
+        },
+        "xhttpSettings": {
+          "extra": {
+            "scMaxBufferedPosts": 30,
+            "scMaxEachPostBytes": 1000000,
+            "scMinPostsIntervalMs": 30,
+            "uplinkHTTPMethod": "OPTIONS",
+            "xPaddingHeader": "X-Cache",
+            "xPaddingKey": "dc",
+            "xPaddingMethod": "tokenish",
+            "xPaddingObfsMode": true,
+            "xPaddingPlacement": "queryInHeader"
+          },
+          "host": "cdn-yc.northvpnfirst.ru",
+          "mode": "packet-up",
+          "path": "/api-yandex",
+          "scMaxEachPostBytes": "0",
+          "scMinPostsIntervalMs": "0",
+          "scStreamUpServerSecs": "0",
+          "uplinkChunkSize": "0",
+          "xPaddingBytes": "0",
+          "xmux": {
+            "cMaxReuseTimes": "0",
+            "hMaxRequestTimes": "0",
+            "hMaxReusableSecs": "0",
+            "maxConcurrency": "0",
+            "maxConnections": "0"
+          }
+        }
+      },
+      "tag": "proxy"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+        {
+        "ip": ["8.8.8.8"],
+        "port": "53",
+        "outboundTag": "direct",
+        "ruleTag": "rule-0",
+        "type": "field"
+        },
+        {
+        "ip": ["1.1.1.1"],
+        "port": "53",
+        "outboundTag": "proxy",
+        "ruleTag": "rule-1",
+        "type": "field"
+        },
+        {
+        "domain": [
+            "domain:avito.st",
+            "domain:vk.com",
+            "geosite:category-ru",
+            "regexp:.*\\.ru$",
+            "regexp:.*\\.su$"
+        ],
+        "outboundTag": "direct",
+        "ruleTag": "rule-3"
+        }
+    ]
+  }
+}

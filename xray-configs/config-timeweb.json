@@ -1,0 +1,86 @@
+{
+  "log": {
+    "loglevel": "debug"
+  },
+  "inbounds": [
+    {
+      "tag": "socks-in",
+      "listen": "127.0.0.1",
+      "port": 10808,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "timeweb-cdn",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "qp6086ogrm.cdn.twcstorage.ru",
+            "port": 443,
+            "users": [
+              {
+                "id": "a4223118-5903-4ead-8536-f6906b2b9321",
+                "encryption": "none",
+                "flow": ""
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "qp6086ogrm.cdn.twcstorage.ru",
+          "alpn": [
+            "h2"
+          ],
+          "fingerprint": "chrome",
+          "allowInsecure": false
+        },
+        "xhttpSettings": {
+          "host": "qp6086ogrm.cdn.twcstorage.ru",
+          "path": "/cdnapi-fejwdjaqwol.txt",
+          "mode": "packet-up",
+
+          "scMaxBufferedPosts": 30,
+          "scMaxEachPostBytes": 1000000,
+
+          "uplinkHTTPMethod": "GET",
+          "uplinkDataPlacement": "body",
+
+          "sessionPlacement": "query",
+          "sessionKey": "x_session",
+
+          "seqPlacement": "query",
+          "seqKey": "x_seq",
+
+          "xPaddingObfsMode": true,
+          "xPaddingBytes": "100-1000",
+          "xPaddingKey": "d",
+          "xPaddingHeader": "Referer",
+          "xPaddingMethod": "tokenish",
+          "xPaddingPlacement": "queryInHeader"
+        }
+      }
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": [
+          "socks-in"
+        ],
+        "outboundTag": "timeweb-cdn"
+      }
+    ]
+  }
+}

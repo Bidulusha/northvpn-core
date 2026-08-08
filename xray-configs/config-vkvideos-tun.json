@@ -1,0 +1,58 @@
+{
+  "inbounds": [
+    {
+        "tag": "tun-in",
+        "protocol": "tun",
+        "settings": {
+            "name": "utun10",
+            "desc": "Wintun",
+            "mtu": 1500,
+            "gateway": ["10.0.0.1/24"],
+            "dns": ["1.1.1.1", "8.8.8.8"],
+            "autoSystemRoutingTable": ["0.0.0.0/0", "::/0"],
+            "autoOutboundsInterfase": "auto"
+        }
+    }
+  ],
+  "log": {
+    "loglevel": "warning"
+  },
+  "outbounds": [
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "81.200.150.101",
+            "port": 32508,
+            "users": [
+              {
+                "encryption": "none",
+                "flow": "xtls-rprx-vision",
+                "id": "f5980aa6-577f-4f32-ac74-043c968b6b15",
+                "security": "auto"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "realitySettings": {
+          "fingerprint": "firefox",
+          "publicKey": "fWKPY06T1n1fdfcnwex1TMjonL7r-Dtqxabz9VHMRDw",
+          "serverName": "www.vkvideo.ru",
+          "shortId": "1c9d05a0371676b6",
+          "spiderX": "/"
+        },
+        "security": "reality",
+        "tcpSettings": {
+          "header": {
+            "type": "none"
+          }
+        }
+      },
+      "tag": "proxy"
+    }
+  ]
+}

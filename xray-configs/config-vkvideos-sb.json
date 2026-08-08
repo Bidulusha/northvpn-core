@@ -1,0 +1,67 @@
+{
+  "log": {
+    "level": "info"
+  },
+  "dns": {
+    "servers": [
+      {
+        "type": "https",
+        "tag": "cloudflare",
+        "server": "1.1.1.1",
+        "server_port": 443,
+        "path": "/dns-query"
+      },
+      {
+        "type": "udp",
+        "tag": "local",
+        "server": "223.5.5.5",
+        "server_port": 53
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "sing-box-tun"
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "type": "vless",
+      "server": "81.200.150.101",
+      "server_port": 32508,
+      "uuid": "f5980aa6-577f-4f32-ac74-043c968b6b15",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.vkvideo.ru",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "firefox"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "fWKPY06T1n1fdfcnwex1TMjonL7r-Dtqxabz9VHMRDw",
+          "short_id": "1c9d05a0371676b6"
+        }
+      },
+      "packet_encoding": "xudp"
+    },
+    {
+      "tag": "direct",
+      "type": "direct"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      }
+    ],
+    "auto_detect_interface": true,
+    "final": "proxy"
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "dns" : {
+    "disableCache" : false,
+    "disableFallback" : false,
+    "disableFallbackIfMatch" : false,
+    "hosts" : {
+      "cdn-yc.northvpnfirst.ru" : "188.72.103.3",
+      "cloudflare-dns.com" : [
+        "104.16.248.249",
+        "104.16.249.249",
+        "2606:4700::6810:f8f9",
+        "2606:4700::6810:f9f9"
+      ],
+      "common.dot.dns.yandex.net" : [
+        "77.88.8.8",
+        "77.88.8.1",
+        "2a02:6b8::feed:0ff",
+        "2a02:6b8:0:1::feed:0ff"
+      ],
+      "dns.alidns.com" : [
+        "223.5.5.5",
+        "223.6.6.6",
+        "2400:3200::1",
+        "2400:3200:baba::1"
+      ],
+      "dns.cloudflare.com" : [
+        "104.16.132.229",
+        "104.16.133.229",
+        "2606:4700::6810:84e5",
+        "2606:4700::6810:85e5"
+      ],
+      "dns.google" : [
+        "8.8.8.8",
+        "8.8.4.4",
+        "2001:4860:4860::8888",
+        "2001:4860:4860::8844"
+      ],
+      "dns.quad9.net" : [
+        "9.9.9.9",
+        "149.112.112.112",
+        "2620:fe::fe",
+        "2620:fe::9"
+      ],
+      "domain:googleapis.cn" : "googleapis.com",
+      "dot.pub" : [
+        "1.12.12.12",
+        "120.53.53.53"
+      ],
+      "one.one.one.one" : [
+        "1.1.1.1",
+        "1.0.0.1",
+        "2606:4700:4700::1111",
+        "2606:4700:4700::1001"
+      ]
+    },
+    "queryStrategy" : "UseIPv4",
+    "servers" : [
+      "1.1.1.1"
+    ],
+    "tag" : "F4CE09FD-A73A-4BD1-8D5E-ADBEF8DD0B1D"
+  },
+  "inbounds" : [
+    {
+      "listen" : "127.0.0.1",
+      "port" : 53641,
+      "protocol" : "socks",
+      "settings" : {
+        "auth" : "noauth",
+        "udp" : true,
+        "userLevel" : 8
+      },
+      "sniffing" : {
+        "destOverride" : [
+          "tls",
+          "http",
+          "quic"
+        ],
+        "enabled" : true,
+        "metadataOnly" : false,
+        "routeOnly" : true
+      },
+      "tag" : "socks"
+    },
+    {
+      "listen" : "127.0.0.1",
+      "port" : 53642,
+      "protocol" : "socks",
+      "settings" : {
+        "auth" : "noauth",
+        "udp" : true,
+        "userLevel" : 8
+      },
+      "tag" : "directSocks"
+    }
+  ],
+  "log" : {
+    "loglevel" : "debug"
+  },
+  "outbounds" : [
+    {
+      "mux" : {
+        "concurrency" : -1,
+        "enabled" : false
+      },
+      "protocol" : "VLESS",
+      "settings" : {
+        "vnext" : [
+          {
+            "address" : "cdn-yc.northvpnfirst.ru",
+            "port" : 443,
+            "users" : [
+              {
+                "encryption" : "none",
+                "id" : "2e1c6dad-6e2a-42a1-a7d0-2c36646697fa",
+                "level" : 8
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings" : {
+        "network" : "xhttp",
+        "security" : "tls",
+        "sockopt" : {
+          "domainStrategy" : "UseIP",
+          "happyEyeballs" : {
+            "interleave" : 2,
+            "maxConcurrentTry" : 4,
+            "prioritizeIPv6" : false,
+            "tryDelayMs" : 250
+          }
+        },
+        "tlsSettings" : {
+          "allowInsecure" : false,
+          "alpn" : [
+            "h2"
+          ],
+          "fingerprint" : "chrome",
+          "serverName" : "cdn-yc.northvpnfirst.ru",
+          "show" : false
+        },
+        "xhttpSettings" : {
+          "extra" : {
+            "scMaxBufferedPosts" : 30,
+            "scMaxEachPostBytes" : "128000-128000",
+            "scMinPostsIntervalMs" : 30,
+            "uplinkHTTPMethod" : "OPTIONS",
+            "xPaddingHeader" : "X-Cache",
+            "xPaddingKey" : "dc",
+            "xPaddingMethod" : "tokenish",
+            "xPaddingObfsMode" : true,
+            "xPaddingPlacement" : "queryInHeader",
+            "xmux" : {
+              "maxConcurrency" : "32-64"
+            }
+          },
+          "host" : "cdn-yc.northvpnfirst.ru",
+          "mode" : "packet-up",
+          "path" : "/api-yandex"
+        }
+      },
+      "tag" : "proxy"
+    },
+    {
+      "protocol" : "freedom",
+      "streamSettings" : {
+        "network" : "tcp",
+        "sockopt" : {
+          "domainStrategy" : "UseIP"
+        }
+      },
+      "tag" : "direct"
+    },
+    {
+      "protocol" : "blackhole",
+      "settings" : {
+        "response" : {
+          "type" : "none"
+        }
+      },
+      "tag" : "block"
+    }
+  ],
+  "policy" : {
+    "levels" : {
+      "8" : {
+        "bufferSize" : 128,
+        "connIdle" : 15,
+        "downlinkOnly" : 1,
+        "handshake" : 4,
+        "statsUserDownlink" : false,
+        "statsUserUplink" : false,
+        "uplinkOnly" : 1
+      }
+    },
+    "system" : {
+      "statsOutboundDownlink" : true,
+      "statsOutboundUplink" : true
+    }
+  },
+  "remarks" : "Yandex-CDN-XHTTP",
+  "routing" : {
+    "balancers" : [
+
+    ],
+    "domainStrategy" : "AsIs",
+    "rules" : [
+      {
+        "ip" : [
+          "8.8.8.8"
+        ],
+        "outboundTag" : "direct",
+        "port" : "53",
+        "ruleTag" : "rule-0",
+        "type" : "field"
+      },
+      {
+        "ip" : [
+          "1.1.1.1"
+        ],
+        "outboundTag" : "proxy",
+        "port" : "53",
+        "ruleTag" : "rule-1",
+        "type" : "field"
+      },
+      {
+        "inboundTag" : [
+          "directSocks"
+        ],
+        "outboundTag" : "direct",
+        "ruleTag" : "rule-2",
+        "type" : "field"
+      },
+      {
+        "domain" : [
+          "domain:avito.st",
+          "domain:vk.com",
+          "geosite:category-ru",
+          "regexp:.*\\.ru$",
+          "regexp:.*\\.su$"
+        ],
+        "outboundTag" : "direct",
+        "ruleTag" : "rule-3"
+      }
+    ]
+  },
+  "stats" : {
+
+  }
+}

@@ -1,0 +1,14 @@
+/Users/vadim/Projects/Rust/github/vpn/northvpn-core/./check/release/deps/serde-3a2b6dd50fa2014d.d: /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/vadim/Projects/Rust/github/vpn/northvpn-core/./check/release/build/serde-d95575771f2c6c61/out/private.rs
+
+/Users/vadim/Projects/Rust/github/vpn/northvpn-core/./check/release/deps/libserde-3a2b6dd50fa2014d.rlib: /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/vadim/Projects/Rust/github/vpn/northvpn-core/./check/release/build/serde-d95575771f2c6c61/out/private.rs
+
+/Users/vadim/Projects/Rust/github/vpn/northvpn-core/./check/release/deps/libserde-3a2b6dd50fa2014d.rmeta: /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs /Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs /Users/vadim/Projects/Rust/github/vpn/northvpn-core/./check/release/build/serde-d95575771f2c6c61/out/private.rs
+
+/Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/lib.rs:
+/Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/integer128.rs:
+/Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/mod.rs:
+/Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/de.rs:
+/Users/vadim/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/src/private/ser.rs:
+/Users/vadim/Projects/Rust/github/vpn/northvpn-core/./check/release/build/serde-d95575771f2c6c61/out/private.rs:
+
+# env-dep:OUT_DIR=/Users/vadim/Projects/Rust/github/vpn/northvpn-core/./check/release/build/serde-d95575771f2c6c61/out
